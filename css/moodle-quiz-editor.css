@@ -1,0 +1,30 @@
+input[type="file"] { 
+  opacity: 0;
+  z-index: -1;
+  position: absolute;
+}
+
+.gotop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+}
+
+.hide {
+    display: none;
+}
+
+.qi input[type="text"] {
+    margin-top: -12px;
+    width: 53vw;    
+}
+
+.control-item-delete, .control-name-delete {
+    cursor: pointer;
+}
+
+.control-name-delete {
+    position: relative;
+    right:  -12px;
+}
