@@ -4,15 +4,54 @@ input[type="file"] {
   position: absolute;
 }
 
-.gotop {
+#menu, #qlist {
+  position: fixed;
+}
+
+#qlist {
+  width: 23vw;
+  overflow-y: auto;
+  height: 92%
+}
+
+#qlist > li:hover {
+  background: #fff9c4;
+}
+
+#qlist > li {
+  padding: 7px;
+}
+
+#wrapper {
+  padding-bottom: 70px;
+  position: fixed;
+  height: 92%;
+  top: 75px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.mt-70 {
+  margin-top: 75px  
+}
+
+.gotop, .addnew {
     position: fixed;
     bottom: 20px;
     right: 20px;
     z-index: 100;
 }
 
+.addnew {
+    right: 90px;
+}
+
 .hide {
     display: none;
+}
+
+.qn {
+    width: 60vw !important;    
 }
 
 .qi input[type="text"] {
@@ -20,11 +59,15 @@ input[type="file"] {
     width: 53vw;    
 }
 
-.control-item-delete, .control-name-delete {
+.control-item-delete, .control-name-delete, .control-item-add {
     cursor: pointer;
 }
 
 .control-name-delete {
     position: relative;
     right:  -12px;
+}
+
+.control-item-add {
+  padding: 25px;
 }
