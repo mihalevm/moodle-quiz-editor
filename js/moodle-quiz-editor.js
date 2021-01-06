@@ -3,7 +3,9 @@ let moodlequizeditor = function() {
     let __lastQID = 0;
 
     function __print_question(qo) {
-        let qitems = '';    
+        let qitems = '';
+        let st = (qo.type === 'single'   ? 'checked' : '');
+        let mt = (qo.type === 'multiple' ? 'checked' : '');
         
         qo.qitem.forEach(function(s){
             qitems = qitems + '<div class="qi valign-wrapper offset-s2 col s10"><p><label><input type="checkbox" ' +
@@ -15,7 +17,7 @@ let moodlequizeditor = function() {
         
         let template = '<div class="qw" id="qw' + qo.qid +'"><div class="row"><div class="valign-wrapper offset-s1 col s11"><input type="text" class="qn" value="' + qo.qname +
             '" onkeyup="moodlequizeditor.changeList(this,'+qo.qid+')"><a nohref title="Удалить" class="control-name-delete" onclick="moodlequizeditor.deleteQuestion(this,'+ qo.qid +
-            ')"><i class="material-icons red-text lighten-4">highlight_off</i></a></div></div><div class="row">'+
+            ')"><i class="material-icons red-text lighten-4">highlight_off</i></a></div></div><div class="row"><div class="offset-s1 col s10 p0 center-align qt"><label><input name="qtype'+qo.qid+'" type="radio" data-type="multiple" '+mt+' /><span>Несколько правильных</span></label><label><input name="qtype'+qo.qid+'" data-type="single" type="radio" '+st+' /><span>Один правильный</span></label></div><div class="row">'+
             qitems+'</div></div>';
 
         $('#qlist').append('<li id="ql'+ qo.qid +'"><a href="#qw' + qo.qid + '">' + qo.qname + '</a></li>');
@@ -30,14 +32,14 @@ let moodlequizeditor = function() {
         qcontent.split('\n').forEach(function(str){
             if (str.length > 0) {
                 let isQName = str.match(/(\-?[\d|\.]+)\%(.+)/);
-
+ 
                 if (isQName === null) {
                     if (qid >= 0) {
                       __print_question(QuizQuestions);
                       QuizQuestions = [];
                     }
                     qid++;
-                    QuizQuestions = {qid: qid, qname : str, qitem : [] };
+                    QuizQuestions = {qid: qid, qname : str, qitem : [], type : 'multiple' };
                 } else if (isQName.length > 0) {
                     QuizQuestions.qitem.push({text : isQName[2], result : parseInt(isQName[1])>0 });
                 }
@@ -105,23 +107,34 @@ let moodlequizeditor = function() {
             if (qname.length > 0) {
                 t = t + qname + ' {\n';
                 let itCount = 0;
+                let firstSingle = false;
     
                 $(o).find('.qi').each(function(j, k){
                     itCount = itCount + ($(k).find('input[type="checkbox"]:first').is(":checked")?1:0);
                 });
+                
+                let qt = $(o).find("input[type='radio'][name^='qtype']:checked").first().data('type');
     
                 $(o).find('.qi').each(function(j, k){
                     let itemText = $(k).find('input[type="text"]:first').val();
                     
                     if (itemText) {
-                        let w = 100/(itCount!=0?itCount:1);
-                        
-                        if (Number(String(w).split('.')[1])>0) {
-                            w = w.toFixed(3);
-                        } else {
-                            w = Math.round(w);
+                        if (qt === 'multiple') {
+                            let w = 100/(itCount!=0?itCount:1);
+                            
+                            if (Number(String(w).split('.')[1])>0) {
+                                w = w.toFixed(3);
+                            } else {
+                                w = Math.round(w);
+                            }
+                            t = t + '~%'+($(k).find('input[type="checkbox"]:first').is(":checked")?'':'-')+w+'%'+ itemText + '\n';
+                        } else if (qt === 'single') {
+                            let isCorrect = $(k).find('input[type="checkbox"]:first').is(":checked");
+                            
+                            t = t + (!firstSingle && isCorrect ? '=' : '~') + itemText + '\n';
+
+                            firstSingle = firstSingle || isCorrect;
                         }
-                        t = t + '~%'+($(k).find('input[type="checkbox"]:first').is(":checked")?'':'-')+w+'%'+ itemText + '\n';
                     }
                 });
                 t = t + '}\n\n';
@@ -164,7 +177,7 @@ let moodlequizeditor = function() {
         },
         
         addNewQuestion: function() {
-            QuizQuestions = {qid: __lastQID, qname : '', qitem : [] };
+            QuizQuestions = {qid: __lastQID, qname : '', qitem : [], type : 'single' };
             QuizQuestions.qitem.push({text : '', result : false });
             QuizQuestions.qitem.push({text : '', result : false });
             __print_question(QuizQuestions);

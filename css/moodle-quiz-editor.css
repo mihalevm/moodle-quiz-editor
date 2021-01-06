@@ -59,6 +59,10 @@ input[type="file"] {
     width: 53vw;    
 }
 
+.qt > label {
+  margin-right: 10px;
+}
+
 .control-item-delete, .control-name-delete, .control-item-add {
     cursor: pointer;
 }
@@ -70,4 +74,8 @@ input[type="file"] {
 
 .control-item-add {
   padding: 25px;
+}
+
+.p0 {
+  padding: 0 !important;
 }
