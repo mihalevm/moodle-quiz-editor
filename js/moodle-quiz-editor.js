@@ -20,7 +20,7 @@ let moodlequizeditor = function() {
             ')"><i class="material-icons red-text lighten-4">highlight_off</i></a></div></div><div class="row"><div class="offset-s1 col s11 p0 center-align qt"><label><input name="qtype'+qo.qid+'" type="radio" data-type="multiple" '+mt+' /><span>Несколько правильных</span></label><label><input name="qtype'+qo.qid+'" data-type="single" type="radio" '+st+' /><span>Один правильный</span></label></div>'+
             qitems+'</div>';
 
-        $('#qlist').append('<li id="ql'+ qo.qid +'"><a href="#qw' + qo.qid + '">' + qo.qname + '</a></li>');
+        $('#qlist').append('<li id="ql'+ qo.qid +'" class="sidenav-close"><a href="#qw' + qo.qid + '">' + qo.qname + '</a></li>');
         
         $('.addnew').before(template);
     }
@@ -153,7 +153,7 @@ let moodlequizeditor = function() {
         init: function () {
             __progress_control(false);
             
-            $('#fakeinpfile').on('click', function(){
+            $('#fakeinpfile, #m_fakeinpfile').on('click', function(){
                 __clearQuiz();
                 $('#inputfile').click();
             });
@@ -163,7 +163,7 @@ let moodlequizeditor = function() {
                 __load_file_content(this);
             });
             
-            $('#outputfile').on('click', function(){
+            $('#outputfile, #m_outputfile').on('click', function(){
                 __buildGIFT();
             });
 
@@ -171,7 +171,15 @@ let moodlequizeditor = function() {
                 __clearQuiz();
             });
             
+            $('#m_qlist').on('click', function(){
+                $('#slide-list').empty();
+                let qlist = $('#qlist').html();
+                $('#slide-list').append(qlist);
+                $('#slide-list').sidenav('open');
+            });
+            
             $('.modal').modal();
+            $('.sidenav').sidenav();
         },
 
         deleteItem: function (o) {

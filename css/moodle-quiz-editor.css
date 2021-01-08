@@ -36,6 +36,13 @@ input[type="file"] {
   text-align: center;
 }
 
+@media only screen and (max-width: 992px) {
+  #wrapper {  
+    left:0px;
+    width: 100%;
+  }
+}
+
 .mt-70 {
   margin-top: 75px  
 }
@@ -96,4 +103,16 @@ input[type="file"] {
 
 #clearConfirm {
   width: 400px;
+}
+
+#m_qlist {
+    margin-left: 15px;
+}
+
+#slide-list li>a {
+    line-height: 1;
+    font-size: 12px;
+    margin-top: 15px;
+    word-break: break-word;
+    padding: 10px;
 }
