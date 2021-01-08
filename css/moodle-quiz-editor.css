@@ -73,6 +73,13 @@ input[type="file"] {
   margin-right: 10px;
 }
 
+@media only screen and (max-width: 601px) {
+  .qt {
+    display: grid;
+    text-align: left;
+  }
+}
+
 .qi > p, .qi span {
   width: 100%;
 }
@@ -93,6 +100,12 @@ input[type="file"] {
   right: -5px;
 }
 
+@media only screen and (max-width: 601px) {
+  .control-item-add {
+    right: 5px
+  }
+}
+
 .p0 {
   padding: 0 !important;
 }
@@ -103,6 +116,16 @@ input[type="file"] {
 
 #clearConfirm {
   width: 400px;
+}
+@media only screen and (max-width: 601px) {
+  #clearConfirm {
+    width: 300px;
+  }
+  
+  nav .brand-logo {
+    font-size: 1rem !important;
+  }
+  
 }
 
 #m_qlist {

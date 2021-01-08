@@ -173,9 +173,12 @@ let moodlequizeditor = function() {
             
             $('#m_qlist').on('click', function(){
                 $('#slide-list').empty();
-                let qlist = $('#qlist').html();
-                $('#slide-list').append(qlist);
-                $('#slide-list').sidenav('open');
+
+                if ($('#qlist').text()) {
+                    let qlist = $('#qlist').html();
+                    $('#slide-list').append(qlist);
+                    $('#slide-list').sidenav('open');
+                }
             });
             
             $('.modal').modal();
