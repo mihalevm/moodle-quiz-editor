@@ -8,21 +8,21 @@ let moodlequizeditor = function() {
         let mt = (qo.type === 'multiple' ? 'checked' : '');
         
         qo.qitem.forEach(function(s){
-            qitems = qitems + '<div class="qi valign-wrapper offset-s2 col s10"><p><label><input type="checkbox" ' +
+            qitems = qitems + '<div class="qi valign-wrapper offset-s2 col s9"><p><label><input type="checkbox" ' +
                 (s.result ? 'checked="checked"':'')+'><span><input type="text" value="' + s.text +
-                '"></span></label></p><a nohref title="Удалить" class="control-item-delete" onclick="moodlequizeditor.deleteItem(this)"><i class="material-icons">highlight_off</i></a></div>';
+                '"></span></label></p><a nohref title="Удалить ответ" class="control-item-delete" onclick="moodlequizeditor.deleteItem(this)"><i class="material-icons">highlight_off</i></a></div>';
         });
 
-        qitems = qitems + '<div class="qi valign-wrapper offset-s6 col s1"><a nohref title="Добавить" class="control-item-add center-align" onclick="moodlequizeditor.addItem(this)"><i class="material-icons red-text">add_circle_outline</i></a></div>';
+        qitems = qitems + '<div class="qi valign-wrapper offset-s10 col s1 right-align"><a nohref title="Добавить ответ" class="control-item-add" onclick="moodlequizeditor.addItem(this)"><i class="material-icons green-text">add_circle_outline</i></a></div>';
         
-        let template = '<div class="qw" id="qw' + qo.qid +'"><div class="row"><div class="valign-wrapper offset-s1 col s11"><input type="text" class="qn" value="' + qo.qname +
-            '" onkeyup="moodlequizeditor.changeList(this,'+qo.qid+')"><a nohref title="Удалить" class="control-name-delete" onclick="moodlequizeditor.deleteQuestion(this,'+ qo.qid +
-            ')"><i class="material-icons red-text lighten-4">highlight_off</i></a></div></div><div class="row"><div class="offset-s1 col s10 p0 center-align qt"><label><input name="qtype'+qo.qid+'" type="radio" data-type="multiple" '+mt+' /><span>Несколько правильных</span></label><label><input name="qtype'+qo.qid+'" data-type="single" type="radio" '+st+' /><span>Один правильный</span></label></div><div class="row">'+
-            qitems+'</div></div>';
+        let template = '<div class="qw" id="qw' + qo.qid +'"><div class="row"><div class="valign-wrapper offset-s1 col s10"><input type="text" class="qn" value="' + qo.qname +
+            '" onkeyup="moodlequizeditor.changeList(this,'+qo.qid+')"><a nohref title="Удалить вопрос" class="control-name-delete" onclick="moodlequizeditor.deleteQuestion(this,'+ qo.qid +
+            ')"><i class="material-icons red-text lighten-4">highlight_off</i></a></div></div><div class="row"><div class="offset-s1 col s11 p0 center-align qt"><label><input name="qtype'+qo.qid+'" type="radio" data-type="multiple" '+mt+' /><span>Несколько правильных</span></label><label><input name="qtype'+qo.qid+'" data-type="single" type="radio" '+st+' /><span>Один правильный</span></label></div>'+
+            qitems+'</div>';
 
         $('#qlist').append('<li id="ql'+ qo.qid +'"><a href="#qw' + qo.qid + '">' + qo.qname + '</a></li>');
         
-        $('#wrapper').append(template);
+        $('.addnew').before(template);
     }
 
     function __parse_quiz_data(qcontent) {
@@ -57,6 +57,7 @@ let moodlequizeditor = function() {
         $('#inputfile').val('');        
         $('#wrapper').empty();
         $('#qlist').empty();
+        $('#wrapper').append('<a class="btn-floating btn-large waves-effect waves-light red addnew" nohref onclick="moodlequizeditor.addNewQuestion()" title="Добавить новый вопрос"><i class="material-icons">add</i></a>');
     }
 
     function __load_file_content(o) {
@@ -140,7 +141,11 @@ let moodlequizeditor = function() {
                 t = t + '}\n\n';
             }
         }).promise().done(function(){
-            __download(t, __curretFilename);
+            if (t) {
+                __download(t, __curretFilename);
+            } else {
+                M.toast({classes:'alert', html: '<span>Нет данных для сохранения</span><button class="btn-flat toast-action" onclick = "M.Toast.dismissAll();"><i class="material-icons">close</i></button>'});
+            }
         });
     }
     
@@ -165,6 +170,8 @@ let moodlequizeditor = function() {
             $('#clearQuiz').on('click', function(){
                 __clearQuiz();
             });
+            
+            $('.modal').modal();
         },
 
         deleteItem: function (o) {
@@ -187,7 +194,7 @@ let moodlequizeditor = function() {
         },
         
         addItem: function (o) {
-            $(o).parent().before('<div class="qi valign-wrapper offset-s2 col s10"><p><label><input type="checkbox"><span><input type="text" value=""></span></label></p><a nohref="" title="Удалить" class="control-item-delete" onclick="moodlequizeditor.deleteItem(this)"><i class="material-icons">highlight_off</i></a></div>');
+            $(o).parent().before('<div class="qi valign-wrapper offset-s2 col s9"><p><label><input type="checkbox"><span><input type="text" value=""></span></label></p><a nohref="" title="Удалить" class="control-item-delete" onclick="moodlequizeditor.deleteItem(this)"><i class="material-icons">highlight_off</i></a></div>');
         },
         
         changeList: function(o, qid) {

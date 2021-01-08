@@ -11,7 +11,9 @@ input[type="file"] {
 #qlist {
   width: 23vw;
   overflow-y: auto;
-  height: 92%
+  height: 92%;
+  word-break: break-word;
+  border-right: 1px dashed lightblue;
 }
 
 #qlist > li:hover {
@@ -26,16 +28,19 @@ input[type="file"] {
   padding-bottom: 70px;
   position: fixed;
   height: 92%;
+  width: 75%;
+  left: 25%;
   top: 75px;
   overflow-y: auto;
   overflow-x: hidden;
+  text-align: center;
 }
 
 .mt-70 {
   margin-top: 75px  
 }
 
-.gotop, .addnew {
+.gotop {
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -43,7 +48,7 @@ input[type="file"] {
 }
 
 .addnew {
-    right: 90px;
+  margin-top: 10px;
 }
 
 .hide {
@@ -51,31 +56,44 @@ input[type="file"] {
 }
 
 .qn {
-    width: 60vw !important;    
 }
 
 .qi input[type="text"] {
     margin-top: -12px;
-    width: 53vw;    
 }
 
 .qt > label {
   margin-right: 10px;
 }
 
+.qi > p, .qi span {
+  width: 100%;
+}
+
 .control-item-delete, .control-name-delete, .control-item-add {
     cursor: pointer;
 }
 
-.control-name-delete {
+.control-name-delete, .control-item-delete {
     position: relative;
-    right:  -12px;
+    right: -5px;
 }
 
 .control-item-add {
-  padding: 25px;
+  line-height: 5;
+  width: 100%;
+  position: relative;
+  right: -5px;
 }
 
 .p0 {
   padding: 0 !important;
+}
+
+.alert {
+  background-color: #e65100; 
+}
+
+#clearConfirm {
+  width: 400px;
 }
