@@ -170,6 +170,14 @@ let moodlequizeditor = function() {
             $('#clearQuiz').on('click', function(){
                 __clearQuiz();
             });
+
+            $('#wrapper').on('scroll', function(o){
+                if ($(o.target).scrollTop()<=10) {
+                    $('.gotop').fadeOut();
+                } else {
+                    $('.gotop').fadeIn();
+                }
+            });
             
             $('#m_qlist').on('click', function(){
                 $('#slide-list').empty();
