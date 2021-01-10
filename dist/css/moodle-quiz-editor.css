@@ -1,0 +1,165 @@
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../font/MaterialIcons.woff2) format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+input[type="file"] {
+  opacity: 0;
+  z-index: -1;
+  position: absolute;
+}
+
+#menu, #qlist {
+  position: fixed;
+}
+
+#qlist {
+  width: 23vw;
+  overflow-y: auto;
+  height: 92%;
+  word-break: break-word;
+  border-right: 1px dashed lightblue;
+}
+
+#qlist > li:hover {
+  background: #fff9c4;
+}
+
+#qlist > li {
+  padding: 7px;
+}
+
+#wrapper {
+  padding-bottom: 70px;
+  position: fixed;
+  height: 92%;
+  width: 75%;
+  left: 25%;
+  top: 75px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  text-align: center;
+}
+
+@media only screen and (max-width: 992px) {
+  #wrapper {  
+    left:0px;
+    width: 100%;
+  }
+}
+
+.mt-70 {
+  margin-top: 75px  
+}
+
+.gotop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+    display: none;
+}
+
+.addnew {
+  margin-top: 10px;
+}
+
+.hide {
+    display: none;
+}
+
+.qn {
+}
+
+.qi input[type="text"] {
+    margin-top: -12px;
+}
+
+.qt > label {
+  margin-right: 10px;
+}
+
+@media only screen and (max-width: 601px) {
+  .qt {
+    display: grid;
+    text-align: left;
+  }
+}
+
+.qi > p, .qi span {
+  width: 100%;
+}
+
+.control-item-delete, .control-name-delete, .control-item-add {
+    cursor: pointer;
+}
+
+.control-name-delete, .control-item-delete {
+    position: relative;
+    right: -5px;
+}
+
+.control-item-add {
+  line-height: 5;
+  width: 100%;
+  position: relative;
+  right: -5px;
+}
+
+@media only screen and (max-width: 601px) {
+  .control-item-add {
+    right: 5px
+  }
+}
+
+.p0 {
+  padding: 0 !important;
+}
+
+.alert {
+  background-color: #e65100; 
+}
+
+#clearConfirm {
+  width: 400px;
+}
+@media only screen and (max-width: 601px) {
+  #clearConfirm {
+    width: 300px;
+  }
+  
+  nav .brand-logo {
+    font-size: 1rem !important;
+  }
+  
+}
+
+#m_qlist {
+    margin-left: 15px;
+}
+
+#slide-list li>a {
+    line-height: 1;
+    font-size: 12px;
+    margin-top: 15px;
+    word-break: break-word;
+    padding: 10px;
+}

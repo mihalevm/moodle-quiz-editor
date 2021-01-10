@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>Moodle Редактор вопросов</title>
+
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="css/moodle-quiz-editor.min.css"  media="screen,projection"/>
+</head>
+<body>
+    <input type="file" id="inputfile">
+    <nav class="orange accent-4 deep-purple-text accent-3" id="menu">
+        <div class="nav-wrapper">
+          <a nohref class="brand-logo center">Moodle редактор вопросов</a>
+          <a href="#" id="m_qlist" class="show-on-small hide-on-large-only left"><i class="material-icons">assignment</i></a></li>
+          <a href="#" data-target="slide-out" class="sidenav-trigger show-on-small right"><i class="material-icons">menu</i></a>
+
+          <ul class="right hide-on-med-and-down">
+            <li><a nohref id="fakeinpfile" title="Загрузить файл"><i class="material-icons">file_upload</i></a></li>
+            <li><a nohref id="outputfile" title="Сохранить файл"><i class="material-icons">file_download</i></a></li>
+            <li><a href="#clearConfirm" class="bnt modal-trigger" title="Очистить все"><i class="material-icons">delete_forever</i></a></li>
+          </ul>
+        </div>
+    </nav>
+    
+    <div class="row">
+        <div class="hide-on-med-only hide-on-small-only col l3">
+            <ul id="qlist" class="mt-70"></ul>
+        </div>
+        <div class="col s12 m12 l9">
+            <div class="progress mt-70">
+              <div class="indeterminate"></div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col s12 m12 l9">
+                    <div id="wrapper">
+                        <a class="btn-floating btn-large waves-effect waves-light red addnew" nohref onclick="moodlequizeditor.addNewQuestion()" title="Добавить новый вопрос"><i class="material-icons">add</i></a>
+                    </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    
+    <a class="btn-floating btn-large waves-effect waves-light red gotop" nohref onclick="$('#wrapper').animate({ scrollTop: 0 }, 500);" title="Вверх"><i class="material-icons">arrow_upward</i></a>
+
+   <div id="clearConfirm" class="modal">
+     <div class="modal-content">
+       <h5>Подтвердите</h5>
+       <p class="center">Удалить содержимое?</p>
+     </div>
+     <div class="modal-footer">
+       <a href="#!" id="clearQuiz" class="modal-close waves-effect waves-green btn-flat">Удалить</a>
+       <a href="#!" class="modal-close waves-effect waves-green btn-flat">Отмена</a>
+     </div>
+   </div>
+
+    <ul id="slide-out" class="sidenav">
+        <li><a href="#!" class="sidenav-close" id="m_fakeinpfile" title="Загрузить файл"><i class="material-icons">file_upload</i> Загрузить файл</a></li>
+        <li><a href="#!" class="sidenav-close" id="m_outputfile" title="Сохранить файл"><i class="material-icons">file_download</i> Сохранить файл</a></li>
+        <li><a href="#clearConfirm" class="sidenav-close bnt modal-trigger" title="Очистить все"><i class="material-icons">delete_forever</i> Очистить все</a></li>
+    </ul>
+
+    <ul id="slide-list" class="sidenav">
+        
+    </ul>
+</body>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/mammoth.browser.min.js"></script>
+    <script type="text/javascript" src="js/moodle-quiz-editor.min.js"></script>
+</html>
